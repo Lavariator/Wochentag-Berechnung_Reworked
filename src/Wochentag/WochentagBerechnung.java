@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/*TODO Maybe create Dropdownmenus*/
 
 public class WochentagBerechnung extends JFrame {
     private JTextField textTag = null;

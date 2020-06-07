@@ -131,7 +131,7 @@ public class WochentagBerechnung extends JFrame {
             int monat = Integer.parseInt(getMonat().getText());
             String jahr = getJahr().getText();
 
-            if (checkMonthLength(tag, monat, Integer.parseInt(jahr)) || Integer.parseInt(jahr) < 1000 || Integer.parseInt(jahr) > 9999)
+            if (checkMonthLength(tag, monat, Integer.parseInt(jahr)) || Integer.parseInt(jahr) < 1 || Integer.parseInt(jahr) > 9999)
                 throw new NumberFormatException();
 
             //Berechnung
@@ -163,10 +163,25 @@ public class WochentagBerechnung extends JFrame {
                     break;
             }
 
-            int jahrVorne = Integer.parseInt(jahr.substring(0,2));
-            int nJarhundert = (3 - (jahrVorne % 4)) * 2;
+            int jahrVorne = 0;
+            int jahrHinten = 0;
 
-            int jahrHinten = Integer.parseInt(jahr.substring(2, 4));
+            switch (jahr.length()){
+                case 1:
+                case 2:
+                    jahrHinten = Integer.parseInt(jahr);
+                    break;
+                case 3:
+                    jahrVorne = Integer.parseInt(jahr.substring(0,1));
+                    jahrHinten = Integer.parseInt(jahr.substring(1,3));
+                    break;
+                case 4:
+                    jahrVorne = Integer.parseInt(jahr.substring(0,2));
+                    jahrHinten = Integer.parseInt(jahr.substring(2, 4));
+                    break;
+            }
+
+            int nJarhundert = (3 - (jahrVorne % 4)) * 2;
             int nJahr = (jahrHinten + jahrHinten / 4) % 7;
 
             //Schaltjahr-Überprüfung
@@ -175,7 +190,7 @@ public class WochentagBerechnung extends JFrame {
                 nSchalt = 6;
 
             //Wochentag-Auswahl
-            int w = (nTag + nMonat + nJahr + nJarhundert + nSchalt) % 7;
+            int w = ((nTag + nMonat + nJahr + nJarhundert + nSchalt) + 1) % 7;
 
             String wochentag = "";
 

@@ -129,9 +129,9 @@ public class WochentagBerechnung extends JFrame {
         try {
             int tag = Integer.parseInt(getTag().getText());
             int monat = Integer.parseInt(getMonat().getText());
-            String  jahr = getJahr().getText();
+            String jahr = getJahr().getText();
 
-            if (checkMonthLength(tag, monat, Integer.parseInt(jahr)))
+            if (checkMonthLength(tag, monat, Integer.parseInt(jahr)) || Integer.parseInt(jahr) < 1000 || Integer.parseInt(jahr) > 9999)
                 throw new NumberFormatException();
 
             //Berechnung
